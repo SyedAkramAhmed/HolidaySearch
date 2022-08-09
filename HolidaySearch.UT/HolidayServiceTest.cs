@@ -174,5 +174,22 @@ namespace HolidaySearch.UT
                 Assert.Equal(1175, response.Flights.First().Price + response.Hotels.First().PricePerNight * response.Hotels.First().Nights);
             }
         }
+        [Fact(DisplayName = "It should return 1 flight and 0 hotel, when no hotels are available")]
+        public void SearchShouldReturn_When_FlightAvailable_But_NoHotelAvailable()
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var holidayService = scope.ServiceProvider.GetRequiredService<IHolidayService>();
+                var response = holidayService.HolidaySearch(new SearchRequestEntity()
+                {
+                    DepartingFrom = "MAN",
+                    TravelingTo = "TFS",
+                    DepartureDate = new DateTime(2023, 7, 1),
+                    Duration = 7
+                });
+                Assert.Single(response.Flights);
+                Assert.Empty(response.Hotels);
+            }
+        }
     }
 }
