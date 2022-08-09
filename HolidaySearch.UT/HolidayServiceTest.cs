@@ -14,7 +14,7 @@ namespace HolidaySearch.UT
         {
             _serviceProvider = fixture.ServiceProvider;
         }
-        [Fact(DisplayName = "It should return 3 flights and 1 hotel, when given search parameters")]
+        [Fact(DisplayName = "It should return 1 flight and 1 hotel, when given search parameters")]
         public void SearchShouldReturn_When_AllSearchParametersProvided()
         {
             using (var scope = _serviceProvider.CreateScope())
